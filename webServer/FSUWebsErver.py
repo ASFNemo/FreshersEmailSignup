@@ -13,7 +13,8 @@ SECRET_KEY = 'development key'
 
 
 def get_db():
-    return AF.get_db(app, DATABASE)
+    db = AF.get_db(app, DATABASE)
+    return db
 
 
 @app.teardown_appcontext
@@ -42,7 +43,7 @@ def signup(fname, lname, emailp1, emailp2, emailAccept):
     print "email: " + emailp1 + "@" + emailp2
     print "Accept: " + emailAccept
     db = get_db()
-	db.execute('select * from user')
+    db.execute('select * from user')
     db.execute('insert into user (fname, lname, emailp1, emailp2, emailAccept) values (?, ?, ?, ?, ?)',
                [fname, lname, emailp1, emailp2, emailAccept])
     db.commit()
